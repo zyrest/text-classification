@@ -41,7 +41,9 @@ class TextCNN(object):
         
         with tf.device('/cpu:0'):
             # 词向量映射
+            # 构建look_up表，5000 * 128 的 one-hot 矩阵
             embedding = tf.get_variable('embedding', [self.config.vocab_size, self.config.embedding_dim])
+            # 将输入转化为 one-hot 编码 -> 600 * 128 的矩阵
             embedding_inputs = tf.nn.embedding_lookup(embedding, self.input_x)
 
         with tf.name_scope("cnn"):
