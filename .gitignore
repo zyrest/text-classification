@@ -1,3 +1,4 @@
 .idea/
+tensorboard/
 __pycache__/
 data/cnews/
