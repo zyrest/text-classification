@@ -145,7 +145,7 @@ def train():
             saver.save(sess=session, save_path=save_path)
             break
     inputs = {'input_x': model.input_x, 'keep_prob': model.keep_prob}
-    outputs = {'logits': model.logits}
+    outputs = {'output': model.y_pred_cls}
     tf.saved_model.simple_save(session, "./model/saved_model", inputs=inputs, outputs=outputs)
 
 

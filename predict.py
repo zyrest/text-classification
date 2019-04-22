@@ -30,7 +30,7 @@ class CnnModel:
         self.session.run(tf.global_variables_initializer())
         # saver = tf.train.Saver()
         # saver.restore(sess=self.session, save_path=save_path)  # 读取保存的模型
-        self.meta_graph_def = sm.loader.load(self.session, tags=[sm.tag_constants.TRAINING], export_dir=pd_path)
+        self.meta_graph_def = sm.loader.load(self.session, tags=[sm.tag_constants.SERVING], export_dir=pd_path)
         signature = self.meta_graph_def.signature_def
 
         x_tensor_name = signature[signature_key].inputs['input_x'].name
