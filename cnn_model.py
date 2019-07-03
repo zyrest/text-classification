@@ -43,13 +43,13 @@ class TextCNN(object):
             # 词向量映射
             # 构建look_up表，5000 * 128 的 one-hot 矩阵
             embedding = tf.get_variable('embedding', [self.config.vocab_size, self.config.embedding_dim])
-            # 将输入转化为 one-hot 编码 -> 600 * 128 的矩阵
+            # 将输入转化为 one-hot 编码 -> batch * 600 * 128 的矩阵
             embedding_inputs = tf.nn.embedding_lookup(embedding, self.input_x)
 
         with tf.name_scope("cnn"):
-            # CNN layer
+            # CNN layer 输出： 256 个 596 * 1 维的向量
             conv = tf.layers.conv1d(embedding_inputs, self.config.num_filters, self.config.kernel_size, name='conv')
-            # global max pooling layer
+            # global max pooling layer，输出：256 维向量
             gmp = tf.reduce_max(conv, axis=[1], name='gmp')
 
         with tf.name_scope("score"):
